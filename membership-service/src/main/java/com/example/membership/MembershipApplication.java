@@ -1,13 +1,13 @@
-package com.example;
+package com.example.membership;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FastcampusPayApplication {
+public class MembershipApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FastcampusPayApplication.class, args);
+        SpringApplication.run(MembershipApplication.class, args);
     }
 
 }
