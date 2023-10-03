@@ -1,7 +1,7 @@
 package com.example.membership.adapter.in.web;
 
-import com.example.membership.application.port.in.RegisterMembershipCommand;
-import com.example.membership.application.port.in.RegisterMembershipUseCase;
+import com.example.membership.application.port.in.ModifyMembershipCommand;
+import com.example.membership.application.port.in.ModifyMembershipUseCase;
 import com.example.membership.common.WebAdapter;
 import com.example.membership.domain.Membership;
 import lombok.RequiredArgsConstructor;
@@ -15,22 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/membership")
 @RestController
 @RequiredArgsConstructor
-public class RegisterMembershipController {
+public class ModifyMembershipController {
 
-    private final RegisterMembershipUseCase registerMembershipUseCase;
+    private final ModifyMembershipUseCase modifyMembershipUseCase;
 
-    @PostMapping("/register")
-    public ResponseEntity<Membership> registerMembership(@RequestBody RegisterMembershipRequest request) {
-        RegisterMembershipCommand command = RegisterMembershipCommand.builder()
+    @PostMapping("/modify")
+    public ResponseEntity<Membership> modifyMembership(@RequestBody ModifyMembershipRequest request) {
+
+        ModifyMembershipCommand command = ModifyMembershipCommand.builder()
+                .membershipId(request.getMembershipId())
                 .name(request.getName())
-                .address(request.getAddress())
                 .email(request.getEmail())
-                .isValid(true)
+                .address(request.getAddress())
                 .isCorp(request.isCorp())
+                .isValid(request.isValid())
                 .build();
 
-        return ResponseEntity.ok(registerMembershipUseCase.registerMembership(command));
+        return ResponseEntity.ok(modifyMembershipUseCase.modifyMembership(command));
     }
 
 }
-
